@@ -1,0 +1,23 @@
+version: '3'
+services:
+  nginx:
+   container_name: test-nginx
+   image: nginx:1.13
+   restart: always
+   ports:
+   - 80:80
+   - 443:443
+   volumes:
+   - ./nginx/conf.d:/etc/nginx/conf.d
+   depends_on:
+   - spring-boot-docker
+  
+  spring-boot-docker:
+    build: ./test_spring
+    ports:
+      - 8080:8080
+    environment:
+      - example=my value  
+    #volumes:
+    #  - javatmp:/tmp
+    #network_mode: host   
